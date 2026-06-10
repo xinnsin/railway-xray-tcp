@@ -1,8 +1,8 @@
 #!/bin/sh
-set -eu
+set -e
 
-if [ -z "${VLESS_UUID:-}" ]; then
-  echo "ERROR: VLESS_UUID is not set. Set it in Railway Variables." >&2
+if [ -z "$VLESS_UUID" ]; then
+  echo "ERROR: VLESS_UUID is not set"
   exit 1
 fi
 
@@ -13,17 +13,5 @@ sed \
   -e "s|\${XRAY_PORT}|${XRAY_PORT}|g" \
   /etc/xray/config.template.json > /etc/xray/config.json
 
-if command -v xray >/dev/null 2>&1; then
-  exec xray run -config /etc/xray/config.json
-fi
-
-if [ -x /usr/bin/xray ]; then
-  exec /usr/bin/xray run -config /etc/xray/config.json
-fi
-
-if [ -x /usr/local/bin/xray ]; then
-  exec /usr/local/bin/xray run -config /etc/xray/config.json
-fi
-
-echo "ERROR: xray binary not found in image." >&2
-exit 1
+echo "Starting Xray on port ${XRAY_PORT}"
+exec /usr/local/bin/xray run -config /etc/xray/config.json
