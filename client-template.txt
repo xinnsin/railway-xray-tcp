@@ -1,0 +1,12 @@
+客户端配置模板：
+
+协议：VLESS
+地址：Railway TCP Proxy 生成的域名，例如 xxxxx.proxy.rlwy.net
+端口：Railway TCP Proxy 生成的公网端口，不是 8080
+UUID：Railway Variables 里设置的 VLESS_UUID
+加密：none
+传输协议：TCP
+TLS：关闭
+SNI：留空
+Mux：先关闭
+UDP：先关闭

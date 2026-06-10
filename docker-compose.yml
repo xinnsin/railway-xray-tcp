@@ -1,0 +1,10 @@
+services:
+  xray:
+    build: .
+    container_name: railway-xray-tcp
+    environment:
+      VLESS_UUID: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+      XRAY_PORT: "8080"
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
